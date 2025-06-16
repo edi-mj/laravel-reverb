@@ -29,7 +29,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                         </svg>
                                     </div>
                                     <div>
-                                        <h1 className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">BlogMaster</h1>
+                                        <h1 className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">BlogERA</h1>
                                         <p className="text-sm text-gray-600 dark:text-gray-300">Sistem Manajemen Artikel</p>
                                     </div>
                                 </div>
