@@ -18,11 +18,8 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-
     $articles = Article::simplePaginate(10);
-
     return Inertia::render('Dashboard', ['articles' => $articles]);
-
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -32,6 +29,16 @@ Route::middleware('auth')->group(function () {
 
     Route::post('delete-article-request', DeleteArticleRequestController::class);
     Route::delete('/article', [ArticleController::class, 'destroy'])->name('article.destroy');
+
+    // --- New Routes for Article Editing ---
+    // Route to show the edit form for a specific article
+    Route::get('/articles/{article}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+
+    // Route to handle the update request for a specific article
+    // We'll use PATCH for updating as it's semantically correct for partial updates,
+    // though PUT is also commonly used for complete replacements.
+    Route::patch('/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');
+    // --- End New Routes ---
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

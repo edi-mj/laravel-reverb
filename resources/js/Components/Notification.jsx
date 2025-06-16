@@ -2,9 +2,45 @@ import { Button, Card, CardHeader, CardBody } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
-const Notification = ({ article, closeNotif }) => {
+const Notification = ({ article, type, closeNotif }) => {
     const [timeoutId, setTimeoutId] = useState(null)
-    const duration = 5000
+    const duration = 5000 // 5 seconds for the notification to disappear
+
+    // Determine content based on notification type
+    let headerText = ''
+    let bodyText = ''
+    let cardBorderColor = ''
+
+    switch (type) {
+        case 'delete-request-sent':
+            headerText = 'Delete Request Sent'
+            bodyText = (
+                <>
+                    <p>You requested to delete the following article:</p>
+                    <p className="py-2 font-bold">{article.title}</p>
+                    <p>
+                        The chief editor must approve this before the removal is
+                        finalized.
+                    </p>
+                </>
+            )
+            cardBorderColor = 'border-cyan-200' // Blueish for request
+            break
+        case 'article-updated':
+            headerText = 'Article Updated!'
+            bodyText = (
+                <>
+                    <p>Your article has been successfully updated:</p>
+                    <p className="py-2 font-bold">{article.title}</p>
+                </>
+            )
+            cardBorderColor = 'border-green-200' // Green for success
+            break
+        default:
+            headerText = 'Notification'
+            bodyText = <p>An event occurred.</p>
+            cardBorderColor = 'border-gray-200'
+    }
 
     useEffect(() => {
         // Clear any existing timeout
@@ -23,7 +59,7 @@ const Notification = ({ article, closeNotif }) => {
                 clearTimeout(timeoutId)
             }
         }
-    }, [])
+    }, [article, closeNotif, duration, timeoutId, type]) // Added type to dependency array
 
     // Stop the timer on mouse enter
     const handleMouseEnter = () => {
@@ -44,15 +80,15 @@ const Notification = ({ article, closeNotif }) => {
     return (
         <Card
             shadow="lg"
-            className="w-[430px] border border-cyan-200 px-2"
+            className={`w-[430px] border ${cardBorderColor} px-2`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
             <CardHeader className="justify-between">
                 <div className="flex gap-5">
                     <div className="flex flex-col items-start justify-center gap-1">
-                        <h4 className="text-default-700 font-semibold leading-none">
-                            Delete request was sent
+                        <h4 className="font-semibold leading-none text-default-700">
+                            {headerText} {/* Dynamic header text */}
                         </h4>
                     </div>
                 </div>
@@ -82,13 +118,8 @@ const Notification = ({ article, closeNotif }) => {
                     </svg>
                 </Button>
             </CardHeader>
-            <CardBody className="text-default-600 pb-4">
-                <p>You requested to delete the following article:</p>
-                <p className="py-2 font-bold">{article.title}</p>
-                <p>
-                    The chief editor must approve this before the removal is
-                    finalized.
-                </p>
+            <CardBody className="pb-4 text-default-600">
+                {bodyText} {/* Dynamic body text */}
             </CardBody>
         </Card>
     )

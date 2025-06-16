@@ -1,7 +1,7 @@
 import DeleteIcon from '@/Components/DeleteIcon'
 import Notification from '@/Components/Notification'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-import { Head, router } from '@inertiajs/react'
+import { Head, router } from '@inertiajs/react' // Import router from Inertia
 import {
     Card,
     CardHeader,
@@ -32,7 +32,7 @@ export default function Dashboard({ auth, articles }) {
 
     const handleDelete = article => {
         router.post(
-            'delete-article-request/',
+            'delete-article-request',
             {
                 id: article.id,
                 user_id: auth.user.id
@@ -43,6 +43,11 @@ export default function Dashboard({ auth, articles }) {
         )
 
         setNotifications(prevNotifs => [...prevNotifs, article])
+    }
+
+    // New: handleEdit function
+    const handleEdit = articleId => {
+        router.get(route('articles.edit', articleId)) // Assuming a route named 'articles.edit'
     }
 
     // Handle the simple pagination navigation.
@@ -160,10 +165,16 @@ export default function Dashboard({ auth, articles }) {
                                                     />
                                                 </CardBody>
                                                 <CardFooter className="justify-end gap-2">
+                                                    {/* New: Edit Button */}
                                                     <Button
                                                         variant="faded"
                                                         color="default"
                                                         className="text-sm font-bold uppercase"
+                                                        onPress={() =>
+                                                            handleEdit(
+                                                                article.id
+                                                            )
+                                                        }
                                                     >
                                                         Edit
                                                     </Button>
