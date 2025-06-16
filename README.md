@@ -1,9 +1,11 @@
 CARA INSTALASI DAN MENJALANKAN PROYEK INI:
 
 1. Clone project
+
 git clone https://github.com/edi-mj/laravel-reverb.git
 
 atau jika menggunakan ssh
+
 git clone git@github.com:edi-mj/laravel-reverb.git
 
 2. Masuk ke direktori project
