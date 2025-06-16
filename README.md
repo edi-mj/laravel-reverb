@@ -56,7 +56,7 @@ CARA INSTALASI DAN MENJALANKAN PROYEK INI:
     
     pilih "yes"
 
-18. Jalankan server
+18. Jalankan server di empat terminal berbeda
 
     npm run dev
     
