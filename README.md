@@ -56,6 +56,8 @@ CARA INSTALASI DAN MENJALANKAN PROYEK INI:
     
     pilih "yes"
 
+    php artisan reverb:install
+
 18. Jalankan server di empat terminal berbeda
 
     npm run dev
