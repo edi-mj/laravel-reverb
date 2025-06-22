@@ -20,9 +20,9 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     $articles = Article::simplePaginate(10);
     return Inertia::render('Dashboard', ['articles' => $articles]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'check.port.role', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'check.port.role'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -40,5 +40,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');
     // --- End New Routes ---
 });
+
+// Route::middleware('role:editor')->group(function () {
+//     Route::get('/dashboard:8001', function () {
+//         $articles = Article::simplePaginate(10);
+//         return Inertia::render('Dashboard', ['articles' => $articles]);
+//     })->middleware(['auth', 'verified'])->name('dashboard');
+// });
 
 require __DIR__ . '/auth.php';
