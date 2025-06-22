@@ -20,7 +20,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     $articles = Article::simplePaginate(10);
     return Inertia::render('Dashboard', ['articles' => $articles]);
-})->middleware(['auth', 'check.port.role', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified', 'check.port.role'])->name('dashboard');
 
 Route::middleware(['auth', 'check.port.role'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

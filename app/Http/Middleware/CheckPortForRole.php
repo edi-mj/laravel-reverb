@@ -30,14 +30,8 @@ class CheckPortForRole
             9001 => 'editor',
         ];
 
-        // Cek apakah port dikenal
-        if (!array_key_exists($port, $portRoleMap)) {
-            return response("🚫 Akses tidak diizinkan untuk port ini", 403);
-        }
-
-        // Cek apakah role cocok dengan port
-        if ($portRoleMap[$port] !== $role) {
-            return response("🚫 Role '$role' tidak boleh akses dari port $port", 403);
+        if (!isset($portRoleMap[$port]) || $portRoleMap[$port] !== $role) {
+            abort(403, 'Akses ditolak dari port ini untuk role Anda.');
         }
 
         return $next($request);

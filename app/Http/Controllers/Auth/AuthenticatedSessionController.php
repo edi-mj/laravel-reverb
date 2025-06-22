@@ -27,8 +27,9 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(LoginRequest $request): \Illuminate\Http\Response
     {
+
         $request->authenticate();
         $request->session()->regenerate();
 
@@ -40,8 +41,7 @@ class AuthenticatedSessionController extends Controller
         ];
 
         $port = $ports[$user->role] ?? 8000;
-
-        return redirect("http://localhost:$port/dashboard");
+        return Inertia::location("http://localhost:$port/dashboard");
     }
 
 
