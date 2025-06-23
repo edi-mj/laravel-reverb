@@ -52,7 +52,7 @@ const Notification = ({ article, closeNotif }) => {
                 <div className="flex gap-5">
                     <div className="flex flex-col items-start justify-center gap-1">
                         <h4 className="font-semibold leading-none text-default-700">
-                            Delete request was sent
+                            Permintaan hapus sudah terkirim
                         </h4>
                     </div>
                 </div>
@@ -83,11 +83,10 @@ const Notification = ({ article, closeNotif }) => {
                 </Button>
             </CardHeader>
             <CardBody className="pb-4 text-default-600">
-                <p>You requested to delete the following article:</p>
-                <p className="py-2 font-bold">{article.title}</p>
+                <p>Anda meminta untuk menghapus artikel ini:</p>
+                <p className="py-2 font-bold">Judul : {article.title}</p>
                 <p>
-                    The chief editor must approve this before the removal is
-                    finalized.
+                    Chief Editor harus menyetujui sebelum penghapusan diselesaikan
                 </p>
             </CardBody>
         </Card>

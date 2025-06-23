@@ -69,7 +69,7 @@ const DeleteNotification = ({ editor, entity, closeNotif }) => {
                 <div className="flex gap-5">
                     <div className="flex flex-col items-start justify-center gap-1">
                         <h4 className="text-default-700 font-semibold leading-none">
-                            Someone has requested to delete an article
+                            Seseorang baru saja meminta untuk menghapus postingan ini
                         </h4>
                     </div>
                 </div>
@@ -101,8 +101,7 @@ const DeleteNotification = ({ editor, entity, closeNotif }) => {
             </CardHeader>
             <CardBody className="text-default-600 pb-4 text-sm">
                 <p>
-                    <span className="font-bold">{editor.name}</span> has
-                    requsted to delete the article{' '}
+                    <span className="font-bold">{editor.name}</span> Meminta untuk menghapus artikel ini {' '}
                     <span className="font-bold">{entity.article.title}</span>.
                     <Image
                         alt={entity.article.title}
@@ -112,7 +111,7 @@ const DeleteNotification = ({ editor, entity, closeNotif }) => {
                         removeWrapper
                         loading="lazy"
                     />
-                    Do you want to allow this?
+                    Apakah anda menyetujui untuk menghapus postingan ini?
                 </p>
             </CardBody>
             <CardFooter className="justify-end gap-2">
@@ -123,10 +122,10 @@ const DeleteNotification = ({ editor, entity, closeNotif }) => {
                     onClick={handleApproveDelete}
                 >
                     <ThumbsUp />
-                    <span>Allow</span>
+                    <span>Setuju</span>
                 </Button>
                 <Button color="default" variant="ghost">
-                    <span>Reject</span>
+                    <span>Tolak</span>
                 </Button>
             </CardFooter>
         </Card>
